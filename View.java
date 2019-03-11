@@ -71,8 +71,6 @@ public View(){
 	public int getXLoc() {
 		return View.xloc;
 	}
-
-
 	public int getWidth() {
 		return View.frameWidth;
 	}
@@ -94,8 +92,7 @@ public View(){
 	    public void paint(Graphics g) {		
 
 	    	picNum = (picNum + 1) % frameCount;
-
-	    
+	    	Model.updateLocationAndDirection();
 	    	
 	    	if ((moveLeft == false)&& (moveUp == false)) { // hit top left 
 	    		g.drawImage(southEast[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
@@ -122,6 +119,7 @@ public View(){
 	    	BufferedImage bufferedImage2;
 	    	BufferedImage bufferedImage3;
 	    	BufferedImage bufferedImage4;
+	    	
 	    	
 	    	if (moveUp == false && moveLeft == false) {
 		    	try {
@@ -167,21 +165,37 @@ public View(){
 	    }
 	    
 	    public void update(int x, int y, Direction direction) {
-	    	xloc = Model.x;
-	    	yloc = Model.x;
-	    	
+	    	xloc = x;
+	    	yloc = y;
+	    	if(direction == Direction.NORTHEAST) {
+	    		moveLeft = false;
+	    		moveUp = true;
+	    	}
+	    	else if(direction == Direction.NORTHWEST) {
+	    		moveLeft = true;
+	    		moveUp = true;
+	    	}
+	    	else if(direction == Direction.SOUTHEAST) {
+	    		moveLeft = false;
+	    		moveUp = false;
+	    	}else {
+	    		moveLeft = true;
+	    		moveUp = false;
+	    	}
 	    	
 	    }
 	    
 	    public static void main(String[] args) {
-	    	Controller cont = new Controller();
-	    	cont.start();
+	    	
 	    	JFrame frame = new JFrame();
 	    	frame.getContentPane().add(new View());
 	    	frame.setBackground(Color.gray);
 	    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	frame.setSize(frameWidth, frameHeight);
 	    	frame.setVisible(true);
+	    	Controller cont = new Controller();
+	    	cont.start();
+	    	
 	    	for(int i = 0; i < 1000; i++){
 	    		frame.repaint();
 	    		try {
@@ -190,7 +204,6 @@ public View(){
 	    			e.printStackTrace();
 	    		}
 	    	}
+	    	
 	    }
-
-	    
 }

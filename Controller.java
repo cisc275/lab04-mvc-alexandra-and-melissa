@@ -13,6 +13,7 @@ public class Controller {
 	
         //run the simulation
 	public void start(){
+		
 		for(int i = 0; i < 5000; i++)
 		{
 			//increment the x and y coordinates, alter direction if necessary

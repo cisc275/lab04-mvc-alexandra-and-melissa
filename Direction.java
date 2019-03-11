@@ -2,6 +2,7 @@
 
 public enum Direction {
 
+	
 	NORTH("north"),
 	NORTHEAST("northeast"),
 	EAST("east"),

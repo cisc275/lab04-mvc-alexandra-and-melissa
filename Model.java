@@ -30,7 +30,7 @@ class Model {
 		return Model.y;
 	}
 
-	public void updateLocationAndDirection() { // if statement to detect collision 
+	public static void updateLocationAndDirection() { // if statement to detect collision 
 		if (View.xloc >= View.frameWidth - 130) {
 			View.moveLeft = true;
 		// test hit left
